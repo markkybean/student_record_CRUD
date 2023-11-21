@@ -1,21 +1,45 @@
-import React from "react";
 import Student from "./Student";
 import { useState, useEffect } from "react";
+import { getFirestore, collection, onSnapshot, addDoc } from "firebase/firestore";
+import firebaseApp from "./firebaseConfig";
 
 export default function Home(){
-    const [student, setStudent] = useState(0);
+    const [student, setStudent] = useState({
+        firstname: '',
+        lastname: '',
+        grade: '',
+    });
 
     const [studentList, setStudentList] = useState([]);
 
     useEffect(() =>{
-        const savedStudentList = JSON.parse(localStorage.getItem('studentList'));
-        if(savedStudentList){
-            setStudentList(savedStudentList);
+
+
+        // initialize cloud firestore and get a reference to the service
+        const db = getFirestore(firebaseApp);
+
+        try{
+            
+            onSnapshot(collection(db, 'students'), snapshot => {
+
+
+                const newStudentList = [];
+
+                snapshot.forEach(student => {
+                    newStudentList.push(student.data());
+                });
+                setStudentList(newStudentList);
+            });
+
+        }catch(e){
+            alert("error")
         }
         
     }, [])
 
     const addStudent = () =>{
+        // initialize cloud firestore and get a reference to the service
+        const db = getFirestore(firebaseApp);
 
         if(student.firstname=== '' || student.lastname==='' || student.grade===''){
             alert("Missing Fields")
@@ -26,6 +50,9 @@ export default function Home(){
                     ...studentList, student
                 ]
             );
+
+            addDoc(collection(db, 'students'), student);
+                
             setStudent({
                 // remove yung nakalagay sa form na sulat
                 firstname: '',
@@ -33,7 +60,8 @@ export default function Home(){
                 grade: '',
             });
 
-            localStorage.setItem('studentList', JSON.stringify(studentList));  
+            
+            // localStorage.setItem('studentList', JSON.stringify(studentList));  
         }
 
         

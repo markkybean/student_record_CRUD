@@ -27,6 +27,8 @@ export default function Layout(){
       });     
     }, [])
 
+
+    //logout function
     const logout = () => {
         const auth = getAuth(firebaseApp);
         signOut(auth).then(() => {

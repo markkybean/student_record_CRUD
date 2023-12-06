@@ -32,7 +32,6 @@ export default function Login(){
         <div className="container border p-5 rounded">
             <h1 className="fw-bold">Login</h1>
             <label htmlFor="email">Email</label>
-            <p>{email} {password}</p>
             <input id="email" type="email"  className="form-control" onChange={(e)=>setEmail(e.target.value)} value={email} />
             <label htmlFor="password">Password</label>
             <input id="password" type="password" className="form-control" onChange={(e)=>setPassword(e.target.value)} value={password}  />

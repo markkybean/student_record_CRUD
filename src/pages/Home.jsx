@@ -44,6 +44,7 @@ export default function Home(){
             alert("error")
         }
 
+        // will check if the user is login
         const auth = getAuth(firebaseApp);
         
         onAuthStateChanged(auth, (user) => {
@@ -62,7 +63,7 @@ export default function Home(){
     
 
 
-
+    // create 
     const addStudent = () =>{
         // initialize cloud firestore and get a reference to the service
         const db = getFirestore(firebaseApp);

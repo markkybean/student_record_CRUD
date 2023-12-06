@@ -1,6 +1,6 @@
 function Student({firstname, lastname, grade, deleteStudent,updateStudent, studentID}){
     return(
-        <div className="alert alert-light bg-dark-subtle">
+        <div className="alert alert-light bg-dark-subtle shadow-lg">
             {lastname}, {firstname}<span className="badge bg-dark ms-2">{grade}</span>
             <button onClick={()=>{
                 deleteStudent(studentID, firstname, lastname);

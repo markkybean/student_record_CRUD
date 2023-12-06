@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import "bootstrap/dist/css/bootstrap.css";
 import 'bootstrap/dist/js/bootstrap.js';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -9,6 +8,8 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Services from './pages/Services';
 import NotFound from './pages/NotFound';
+import Login from './pages/auth/Login.jsx';
+import Register from './pages/auth/Register.jsx';
 
 
 function App() {
@@ -24,8 +25,10 @@ function App() {
             <Route path="about" element={<About />}/>
             <Route path="contact" element={<Contact />}/>
             <Route path="services" element={<Services />}/>
+            <Route path="login" element={<Login />}/>
+            <Route path="register" element={<Register />}/>
+            <Route path='*' element={<NotFound />} /> 
           </Route>
-          <Route path='*' element={<NotFound />} /> 
         </Routes>
       </BrowserRouter>
     </>
